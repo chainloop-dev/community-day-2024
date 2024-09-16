@@ -1,0 +1,16 @@
+# NOTE: By default this file runs a development setup. 
+# To run a labs setup, use `docker-compose -f compose.labs.yml up`
+include:
+  - ./compose.common.yml
+
+services:
+  # OIDC provider for development
+  dex:
+    volumes:
+      - ".:/wd"
+    image: docker.io/bitnami/dex:2
+    working_dir: /wd/dex
+    command: "serve config.dev.yaml"
+    ports:
+      - "0.0.0.0:5556:5556/tcp"
+
