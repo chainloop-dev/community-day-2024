@@ -1,0 +1,31 @@
+# Configuration file meant to be used in the development environment.
+# it assumes some services are running in the host machine, like vault
+# Please make sure you run those via the convenience docker compose file
+# [root]/devel/compose.yml
+server:
+  http:
+    addr: 0.0.0.0:8001
+    # Timeouts for http downloads
+    # grpc downloads/uploads don't require this because they don't have timeouts
+    timeout: 300s
+  grpc:
+    addr: 0.0.0.0:9001
+    # Some unary RPCs are slow, so we need to increase the timeout
+    # For example, Azure Blob Storage describe takes more than 1 second to respond sometimes
+    timeout: 5s
+    # tls_config:
+    #   certificate: "../../devel/devkeys/selfsigned/cas.crt"
+    #   private_key: "../../devel/devkeys/selfsigned/cas.key"
+  http_metrics:
+    addr: 0.0.0.0:5001
+
+credentials_service:
+  # we will check that we can read there
+  secret_prefix: chainloop-devel
+  # Remember to run vault via docker compose up
+  vault:
+    address: ${VAULT_ADDRESS:http://0.0.0.0:8200}
+    token: ${VAULT_TOKEN:notasecret}
+
+auth:
+  public_key_path: ${PUBLIC_KEY_PATH:../../devel/devkeys/cas.pub}
