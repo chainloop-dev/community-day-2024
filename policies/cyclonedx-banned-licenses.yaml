@@ -22,35 +22,35 @@ metadata:
 spec:
   type: SBOM_CYCLONEDX_JSON
   embedded: |
-		package banned_licenses
+    package banned_licenses
 
-		import rego.v1
+    import rego.v1
 
-		# ensure argument is always an array
-		banned_licenses contains license if {
-			is_array(input.args.licenses)
-			some license in input.args.licenses
-		}
+    # ensure argument is always an array
+    banned_licenses contains license if {
+      is_array(input.args.licenses)
+      some license in input.args.licenses
+    }
 
-		banned_licenses contains license if {
-			not is_array(input.args.licenses)
-			license := input.args.licenses
-		}
+    banned_licenses contains license if {
+      not is_array(input.args.licenses)
+      license := input.args.licenses
+    }
 
-		violations contains ref if {
-			some i
-			comp := input.components[i]
-			some j
-			license := comp.licenses[j].license
-			banned(license, banned_licenses[k])
-			ref := sprintf("Forbidden license %v for %v (%v)", [banned_licenses[k], comp.name, comp["bom-ref"]])
-		}
+    violations contains ref if {
+      some i
+      comp := input.components[i]
+      some j
+      license := comp.licenses[j].license
+      banned(license, banned_licenses[k])
+      ref := sprintf("Forbidden license %v for %v (%v)", [banned_licenses[k], comp.name, comp["bom-ref"]])
+    }
 
-		# Both id and name fields can be used to reference licenses
-		banned(license, id) if {
-			license.name == id
-		}
+    # Both id and name fields can be used to reference licenses
+    banned(license, id) if {
+      license.name == id
+    }
 
-		banned(license, id) if {
-			license.id == id
-		}
+    banned(license, id) if {
+      license.id == id
+    }
