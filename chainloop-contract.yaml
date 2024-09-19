@@ -13,6 +13,9 @@ policies:
     - ref: file://policies/cyclonedx-banned-licenses.yaml
       with:
         licenses: AGPL-1.0-only, AGPL-1.0-or-later, AGPL-3.0-only, AGPL-3.0-or-later
+    - ref: file://policies/sarif-vulns-trivy.yaml
+      with:
+        severity: MEDIUM
   attestation:
     # We want at least 1 SBOM in any of the supported formats (cyclonedx, spdx)
     - ref: file://policies/sbom-present.yaml
