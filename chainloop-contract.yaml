@@ -1,0 +1,19 @@
+schemaVersion: v1
+materials:
+  # We want at least 1 container
+  - name: container
+    type: CONTAINER_IMAGE
+policies:
+  materials:
+    # Any SPDX should be less than 1 day old
+    - ref: file://policies/cyclonedx-freshness.yaml
+      with:
+        limit: 1
+    # AGPL licenses are not allowed
+    - ref: file://policies/cyclonedx-banned-licenses.yaml
+      with:
+        licenses: AGPL-1.0-only, AGPL-1.0-or-later, AGPL-3.0-only, AGPL-3.0-or-later
+  attestation:
+    # We want at least 1 SBOM in any of the supported formats (cyclonedx, spdx)
+    - ref: file://policies/sbom-present.yaml
+
