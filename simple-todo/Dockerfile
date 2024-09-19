@@ -5,4 +5,5 @@ WORKDIR /app
 
 RUN go build -o server .
 
-ENTRYPOINT [ "/server" ]
+EXPOSE 12345
+ENTRYPOINT [ "/app/server" ]
