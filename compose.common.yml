@@ -18,19 +18,50 @@ services:
 
   # in memory-only vault for development
   # note that secrets will get removed when the container is restarted
-  vault:
-    image: docker.io/vault:1.12.3
-    cap_add:
-      - IPC_LOCK
-    ports:
-      - 8200:8200
-    environment:
-      - VAULT_DEV_ROOT_TOKEN_ID=notasecret
-    healthcheck:
-      test: [ "CMD", "wget", "--spider", "http://127.0.0.1:8200/v1/sys/health" ]
-      interval: 10s
-      timeout: 3s
-      retries: 10
-      start_period: 5s
+#  vault:
+#    image: docker.io/vault:1.12.3
+#    cap_add:
+#      - IPC_LOCK
+#    ports:
+#      - 8200:8200
+#    environment:
+#      - VAULT_DEV_ROOT_TOKEN_ID=notasecret
+#    healthcheck:
+#      test: [ "CMD", "wget", "--spider", "http://127.0.0.1:8200/v1/sys/health" ]
+#      interval: 10s
+#      timeout: 3s
+#      retries: 10
+#      start_period: 5s
+#
+#  vault:
+#    image: docker.io/vault:1.12.3
+#    container_name: vault.community2024.local
+#    environment:
+#      VAULT_ADDR: "https://vault.community2024.local:8200"
+#      VAULT_API_ADDR: "https://vault1.community2024.local:8200"
+#      VAULT_ADDRESS: "https://vault1.community2024.local:8200"
+#      VAULT_CACERT: /certs/ca.crt
+      # VAULT_UI: true
+      # VAULT_TOKEN:
+#    ports:
+#      - "8200:8200"
+#      #- "8201:8201"
+    #restart: always
+#    volumes:
+#      - ./container-configs/vault/logs:/vault/logs/:rw
+#      - ./container-configs/vault/data:/vault/data/:rw
+#      - ./container-configs/vault/config:/vault/config/:rw
+#      - ./container-configs/vault/certs:/certs/:rw
+#      - ./container-configs/vault/file:/vault/file/:rw
+#    cap_add:
+#      - IPC_LOCK
+#    healthcheck:
+#      test: [ "CMD", "wget", "--spider", "http://127.0.0.1:8200/v1/sys/health" ]
+#      interval: 10s
+#      timeout: 3s
+#      retries: 10
+#      start_period: 5s  
+#    entrypoint: vault server -config /vault/config/config.hcl
+
 volumes:
   postgresql_data:

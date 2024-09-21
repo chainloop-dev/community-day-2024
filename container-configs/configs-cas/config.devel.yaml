@@ -25,7 +25,8 @@ credentials_service:
   # Remember to run vault via docker compose up
   vault:
     address: ${VAULT_ADDRESS:http://0.0.0.0:8200}
-    token: ${VAULT_TOKEN:notasecret}
+    #token: ${VAULT_TOKEN:notasecret}
+    token: ${VAULT_TOKEN:}
 
 auth:
   public_key_path: ${PUBLIC_KEY_PATH:../../devel/devkeys/cas.pub}

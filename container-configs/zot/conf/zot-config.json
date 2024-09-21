@@ -23,9 +23,9 @@
       "enable": true
     },
     "trust": {
-      "enable": false,
-      "cosign": false,
-      "notation": false
+      "enable": true,
+      "cosign": true,
+      "notation": true
     }
   }
 }

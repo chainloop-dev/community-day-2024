@@ -10,12 +10,7 @@ services:
       - LOG_LEVEL_APP=INFO
       - LOG_LEVEL_SERVER=INFO
       - TLS_SETUP_ENABLED=later
-      #- DATABASE_USER_PRIVILEGED=keyfactor
-      #- DATABASE_PASSWORD_PRIVILEGED=keyfactor
       - PROXY_HTTP_BIND=0.0.0.0
-    #ports:
-      #- "80:8080"
-      #- "443:8443"
   signserver:
     hostname: signserver
     container_name: signserver
@@ -27,9 +22,6 @@ services:
       - LOG_LEVEL_SERVER=INFO
       - TLS_SETUP_ENABLED=later
       - PROXY_HTTP_BIND=0.0.0.0
-#    ports:
-#      - "80:8080"
-#      - "443:8443"
   nginx:
     hostname: registry.community2024.local
     container_name: nginx
@@ -39,25 +31,17 @@ services:
       - "443:443"
     volumes:
       # main configuration
-      #- ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./nginx/conf:/etc/nginx
+      - ./container-configs/nginx/conf:/etc/nginx
       # TLS keys
-      - ./nginx/tls:/etc/nginx/tls
-#  registry:
-#    hostname: registry
-#    container_name: registry
-#    image: "registry:latest"
-#    volumes:
-      # containers
-#      - ./containers:/var/lib/registry
+      - ./container-configs/nginx/tls:/etc/nginx/tls
   registry:
     hostname: zot-registry
     container_name: zot-registry 
     image: "ghcr.io/project-zot/zot-linux-amd64:latest"
     volumes:
       # containers
-      - ./containers:/var/lib/registry
-      - ./zot/conf/zot-config.json:/etc/zot/config.json:ro
+      - ./container-configs/containers:/var/lib/registry
+      - ./container-configs/zot/conf/zot-config.json:/etc/zot/config.json:ro
     #networks:
       #chainloop-lab_default:
         #aliases:
