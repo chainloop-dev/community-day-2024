@@ -2,3 +2,4 @@
 *.log
 *.retry
 *.swp
+container-configs/vault/config/cluster-keys.json
