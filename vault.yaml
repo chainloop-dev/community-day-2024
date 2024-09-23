@@ -8,9 +8,9 @@ services:
     image: docker.io/vault:1.12.3
     container_name: vault.community2024.local
     environment:
-      VAULT_ADDR: "https://vault.community2024.local:8200"
-      VAULT_API_ADDR: "https://vault1.community2024.local:8200"
-      VAULT_ADDRESS: "https://vault1.community2024.local:8200"
+      #VAULT_ADDR: "https://vault.community2024.local:8200"
+      #VAULT_API_ADDR: "https://vault.community2024.local:8200"
+      #VAULT_ADDRESS: "https://vault.community2024.local:8200"
       VAULT_CACERT: /certs/ca.crt
       # VAULT_UI: true
       # VAULT_TOKEN:
